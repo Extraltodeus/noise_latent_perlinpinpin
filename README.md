@@ -2,7 +2,7 @@
 This allows to create latent spaces filled with perlin-based noise that can actually be used by the samplers.
 
 # installation:
-Just drop the .py file in your custom nodes folder.
+Just drop the .py file in your custom nodes folder or download the repository as zip and put it in the custom nodes folder.
 
 You will also need BlenderNeko noise related nodes to use this and the workflow:
 
