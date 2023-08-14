@@ -8,6 +8,9 @@ You will also need BlenderNeko noise related nodes to use this and the workflow:
 
 https://github.com/BlenderNeko/ComfyUI_Noise
 
+# known limitation:
+Some aspect ratio does not work.
+
 # Use
 
 I've included a workflow with notes in it to give you the basics but this is uncharted territory.
