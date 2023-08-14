@@ -21,8 +21,12 @@ It was a pain to be able to finally have a noisy usable fractal!
 
 ![image](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/22b5e919-8d05-491b-af0c-7c62a78eb6d7)
 
-Now you can reinject the same noise pattern after an upscale and get more coherent results (I haven't actually tried yet but that's the idea that made me do this)
+Now you can reinject the same noise pattern after an upscale and get more coherent results.
 
-Look at this happy perlin fluffy dog!
+This Perlin Merlin Rabbit has been with SDXL using the perlin based noise.
 
-![image](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/1b489821-632a-47cd-90c9-df35e876c579)
+The workflow has been noisy perlin injection -> SDXL Base (15 steps) -> VAE decode -> lanczos resize -> VAE encode -> same seed noisy perlin injection -> SDXL refiner (5 steps)
+
+The lanczos resize nodes are [here](https://github.com/Extraltodeus/CustomComfyUINodes/blob/main/image_lanczos.py) and [here](https://github.com/Extraltodeus/CustomComfyUINodes/blob/main/image_lanczos_to_res.py)
+
+![00296UI_00001_](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/cd06e1e8-e5bd-461a-8e54-f114a83afdf9)
