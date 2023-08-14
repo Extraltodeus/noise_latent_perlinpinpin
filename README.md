@@ -23,7 +23,7 @@ It was a pain to be able to finally have a noisy usable fractal!
 
 Now you can reinject the same noise pattern after an upscale and get more coherent results.
 
-This Perlin Merlin Rabbit has been with SDXL using the perlin based noise.
+This Perlin Merlin Rabbit has been made with SDXL using the perlin based noise.
 
 The workflow has been noisy perlin injection -> SDXL Base (15 steps) -> VAE decode -> lanczos resize (x1.5) -> VAE encode -> same seed noisy perlin injection (but 1.5x bigger) -> SDXL refiner (5 steps)
 
