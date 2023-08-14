@@ -25,7 +25,7 @@ Now you can reinject the same noise pattern after an upscale and get more cohere
 
 This Perlin Merlin Rabbit has been with SDXL using the perlin based noise.
 
-The workflow has been noisy perlin injection -> SDXL Base (15 steps) -> VAE decode -> lanczos resize -> VAE encode -> same seed noisy perlin injection -> SDXL refiner (5 steps)
+The workflow has been noisy perlin injection -> SDXL Base (15 steps) -> VAE decode -> lanczos resize (x1.5) -> VAE encode -> same seed noisy perlin injection (but 1.5x bigger) -> SDXL refiner (5 steps)
 
 The lanczos resize nodes are [here](https://github.com/Extraltodeus/CustomComfyUINodes/blob/main/image_lanczos.py) and [here](https://github.com/Extraltodeus/CustomComfyUINodes/blob/main/image_lanczos_to_res.py)
 
