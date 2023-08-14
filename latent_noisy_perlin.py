@@ -14,7 +14,7 @@ class NoisyLatentPerlin:
             "batch_size": ("INT", {"default": 1, "min": 1, "max": 64}),
             "scale": ("INT", {"default": 8, "min": 0, "max": 1024}),
             "octaves": ("INT", {"default": 4, "min": 0, "max": 1024}),
-            "persistence": ("FLOAT", {"default": 1.35, "min": 0, "max": 100.0, "step": 0.001}),
+            "persistence": ("FLOAT", {"default": 1.342, "min": 0, "max": 100.0, "step": 0.001}),
             "noise_iterations": ("INT", {"default": 6, "min": 0, "max": 32}),
             "min_max": ("FLOAT", {"default": 6.7, "min": 0, "max": 100.0, "step": 0.1}),
             "min_max_method": (["stretch","clamp","zero_out","replace"],{"default": "replace",}),
