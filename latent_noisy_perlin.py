@@ -4,6 +4,9 @@ import math
 MAX_RESOLUTION=8192
 
 class NoisyLatentPerlin:
+    def __init__(self):
+        self.center_mean = False
+
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {
@@ -20,6 +23,7 @@ class NoisyLatentPerlin:
             "min_max_method": (["stretch","clamp","zero_out","replace"],{"default": "replace",}),
             "reduce_near_zero_factor": ("FLOAT", {"default": 6.7, "min": 0, "max": 100.0, "step": 0.1}),
             "center_mean" : ("BOOLEAN", {"default": True}),
+            "center_mean_at_layer_creation" : ("BOOLEAN", {"default": False}),
             }}
     RETURN_TYPES = ("LATENT",)
     FUNCTION = "create_noisy_latents_perlin"
@@ -53,6 +57,8 @@ class NoisyLatentPerlin:
             noise += amplitude * self.rand_perlin_2d(shape, (frequency*res[0], frequency*res[1]))
             frequency *= 2
             amplitude *= persistence
+        if self.center_mean_at_layer_creation:
+            noise = noise - torch.mean(noise)
         return noise
     
     def scale_tensor(self, x, factor):
@@ -69,7 +75,8 @@ class NoisyLatentPerlin:
         scaling_factor = 1 - (1 / (tensor.abs() + 1))
         return tensor * (1 + factor * (scaling_factor - 1))
 
-    def create_noisy_latents_perlin(self, source, seed, width, height, batch_size, scale, octaves, persistence, noise_iterations, min_max, min_max_method,reduce_near_zero_factor,center_mean):
+    def create_noisy_latents_perlin(self, source, seed, width, height, batch_size, scale, octaves, persistence, noise_iterations, min_max, min_max_method,reduce_near_zero_factor,center_mean, center_mean_at_layer_creation):
+        self.center_mean_at_layer_creation = center_mean_at_layer_creation
         torch.manual_seed(seed)
         if source == "CPU":
             device = "cpu"
