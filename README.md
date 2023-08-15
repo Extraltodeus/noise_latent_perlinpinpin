@@ -27,7 +27,11 @@ Now you can reinject the same noise pattern after an upscale and get more cohere
 # What's the idea?
 
 The idea is to generate multiple batches (that's the "noise_iteration" parameter) of perlin noise, then multiply them together to "break" the usual perlin pattern and scatter the noise. Then substracting the mean value so to "center" the value distribution and make it look like the usual noise distribution while keeping the fractal property.
+
 The "persistence" setting being basically a multiplication factor for each layer has a strong effect.
+
+"reduce_near_zero_factor" will start to "compress" the values towards zero to make the value distribution more "gaussian".
+
 Finding the right settings for this was really like aiming at the moon with a slingshot. I guess that if I had made more evolved noise analysis tools rather than printing the value distribution in the terminal it would have made things a little easier.
 
 # Example / Idea
