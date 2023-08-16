@@ -8,7 +8,7 @@ You will also need BlenderNeko noise related nodes to use this and the workflow:
 
 https://github.com/BlenderNeko/ComfyUI_Noise
 
-[I highly recommend to use city96 latent upscaler in order to upscale the latent in the middle of the generation if you want to use this node for better images!](https://github.com/city96/SD-Latent-Upscaler)
+[I highly recommend to use city96 latent upscaler in order to upscale the latent in the middle of the generation if you want to use this node for better upscales!](https://github.com/city96/SD-Latent-Upscaler)
 
 A workflow using his node is within the house picture at the end of the readme.
 
