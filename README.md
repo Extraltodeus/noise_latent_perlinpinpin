@@ -8,6 +8,10 @@ You will also need BlenderNeko noise related nodes to use this and the workflow:
 
 https://github.com/BlenderNeko/ComfyUI_Noise
 
+[I highly recommend to use city96 latent upscaler in order to upscale the latent in the middle of the generation if you want to use this node for better images!](https://github.com/city96/SD-Latent-Upscaler)
+
+A workflow using his node is within the house picture at the end of the readme.
+
 # known limitation:
 - Only multiples of 64 can be used for the resolutions or it will throw an error.
 - If a kitten sneezes on the wrong setting from a distance it might just break everything.
@@ -43,3 +47,9 @@ The workflow has been noisy perlin injection (defaults settings from the shared 
 The lanczos resize nodes are [here](https://github.com/Extraltodeus/CustomComfyUINodes/blob/main/image_lanczos.py) and [here](https://github.com/Extraltodeus/CustomComfyUINodes/blob/main/image_lanczos_to_res.py)
 
 ![00296UI_00001_](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/cd06e1e8-e5bd-461a-8e54-f114a83afdf9)
+
+
+Comfy workflow included in this image. It has been upscaled x2 mid generation using SD1.5 (realistic vision 30). BNK_Noise generator is present yet disconnected, it uses [city96 latent upscaler](https://github.com/city96/SD-Latent-Upscaler):
+
+![00049UI_00001_](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/823e945f-a00b-4101-87c2-4fa776004250)
+
