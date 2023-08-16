@@ -49,7 +49,21 @@ The lanczos resize nodes are [here](https://github.com/Extraltodeus/CustomComfyU
 ![00296UI_00001_](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/cd06e1e8-e5bd-461a-8e54-f114a83afdf9)
 
 
-Comfy workflow included in this image. It has been upscaled x2 mid generation using SD1.5 (realistic vision 30). BNK_Noise generator is present yet disconnected, it uses [city96 latent upscaler](https://github.com/city96/SD-Latent-Upscaler):
+Comfy workflow included in this image. It has been upscaled x2 mid generation using SD1.5 (realistic vision 30). BNK_Noise generator is present yet disconnected (delete it if you don't have it then), it uses [city96 latent upscaler](https://github.com/city96/SD-Latent-Upscaler):
 
 ![00049UI_00001_](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/823e945f-a00b-4101-87c2-4fa776004250)
+
+Another comparison:
+
+Upscaled with perlin-based noise:
+
+![261039117-ce59f1cb-f1d7-42ad-931c-996e6e952eba](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/65e1ed88-89fc-4df2-9301-09468b61122a)
+
+Here the noise that has been injected in the latent space after the upscale is the usual noise:
+
+![261060650-c56fd782-6e24-49c6-946d-53c199d7272d](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/accf59c8-d268-4cc8-af60-4b32b1fd76e6)
+
+It think that we can conclude that it works ;)
+
+
 
