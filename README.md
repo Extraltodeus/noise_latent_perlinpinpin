@@ -66,4 +66,4 @@ Here the noise that has been injected in the latent space after the upscale is t
 It think that we can conclude that it works ;)
 
 
-
+If you like my work and don't want me to starve don't hesitate to check my [ko-fi page](https://ko-fi.com/extraltodeus)https://ko-fi.com/extraltodeus
