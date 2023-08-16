@@ -53,7 +53,7 @@ Comfy workflow included in this image. It has been upscaled x2 mid generation us
 
 ![00049UI_00001_](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/823e945f-a00b-4101-87c2-4fa776004250)
 
-Another comparison:
+# Another comparison:
 
 Upscaled with perlin-based noise:
 
