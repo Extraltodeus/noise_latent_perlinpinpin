@@ -13,7 +13,7 @@ https://github.com/BlenderNeko/ComfyUI_Noise
 A workflow using his node is within the house picture at the end of the readme.
 
 # known limitation:
-- Only multiples of 64 (I'm not even sure lol) can be used for the resolutions or it will throw an error. For sure what works will work with a doubled scale.
+- Only multiples of octave*scale*8 (so 512 at the default settings) can be used for the resolutions or it will throw an error.
 - If a kitten sneezes on the wrong setting from a distance it might just break everything.
 
 # Use
