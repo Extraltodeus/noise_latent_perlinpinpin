@@ -1,29 +1,19 @@
 import torch
-import comfy.model_management
 import math
 MAX_RESOLUTION=8192
 
 class NoisyLatentPerlin:
     def __init__(self):
-        self.center_mean = False
+        pass
 
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {
-            "source":(["CPU", "GPU"], ),
             "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             "width": ("INT", {"default": 1024, "min": 8, "max": MAX_RESOLUTION, "step": 8}),
             "height": ("INT", {"default": 1024, "min": 8, "max": MAX_RESOLUTION, "step": 8}),
             "batch_size": ("INT", {"default": 1, "min": 1, "max": 64}),
-            "scale": ("INT", {"default": 8, "min": 0, "max": 1024}),
-            "octaves": ("INT", {"default": 4, "min": 0, "max": 1024}),
-            "persistence": ("FLOAT", {"default": 1.342, "min": 0, "max": 100.0, "step": 0.001}),
-            "noise_iterations": ("INT", {"default": 6, "min": 0, "max": 32}),
-            "min_max": ("FLOAT", {"default": 6.7, "min": 0, "max": 100.0, "step": 0.1}),
-            "min_max_method": (["stretch","clamp","zero_out","replace"],{"default": "replace",}),
-            "reduce_near_zero_factor": ("FLOAT", {"default": 6.7, "min": 0, "max": 100.0, "step": 0.1}),
-            "center_mean" : ("BOOLEAN", {"default": True}),
-            "center_mean_at_layer_creation" : ("BOOLEAN", {"default": False}),
+            "detail_level": ("FLOAT", {"default": 0, "min": -1, "max": 1.0, "step": 0.1}),
             }}
     RETURN_TYPES = ("LATENT",)
     FUNCTION = "create_noisy_latents_perlin"
@@ -57,56 +47,23 @@ class NoisyLatentPerlin:
             noise += amplitude * self.rand_perlin_2d(shape, (frequency*res[0], frequency*res[1]))
             frequency *= 2
             amplitude *= persistence
-        if self.center_mean_at_layer_creation:
-            noise = noise - torch.mean(noise)
+        noise = (torch.sin(torch.remainder(noise*1000000,83))+1)/2
         return noise
     
-    def scale_tensor(self, x, factor):
+    def scale_tensor(self, x):
         min_value = x.min()
         max_value = x.max()
-        x = 2 * (x - min_value) / (max_value - min_value) - 1
-        return x*factor
+        x = (x - min_value) / (max_value - min_value)
+        return x
 
-    def scale_near_zero(self, tensor, factor):
-        scaling_factor = 1 / (tensor.abs() + 1)
-        return tensor * (1 + factor * scaling_factor)
-
-    def reduce_near_zero(self, tensor, factor):
-        scaling_factor = 1 - (1 / (tensor.abs() + 1))
-        return tensor * (1 + factor * (scaling_factor - 1))
-
-    def create_noisy_latents_perlin(self, source, seed, width, height, batch_size, scale, octaves, persistence, noise_iterations, min_max, min_max_method,reduce_near_zero_factor,center_mean, center_mean_at_layer_creation):
-        self.center_mean_at_layer_creation = center_mean_at_layer_creation
+    def create_noisy_latents_perlin(self, seed, width, height, batch_size, detail_level):
         torch.manual_seed(seed)
-        if source == "CPU":
-            device = "cpu"
-        else:
-            device = comfy.model_management.get_torch_device()
-        noise = torch.zeros((batch_size, 4, height // 8, width // 8), dtype=torch.float32, device=device).cpu()
+        noise = torch.zeros((batch_size, 4, height // 8, width // 8), dtype=torch.float32, device="cpu").cpu()
         for i in range(batch_size):
             for j in range(4):
-                noise_values = [self.rand_perlin_2d_octaves((height // 8, width // 8), (scale,scale), octaves, persistence) for _ in range(noise_iterations)]
-                result = torch.prod(torch.stack(noise_values), dim=0)
-
-                replacement_value = self.rand_perlin_2d_octaves((height // 8, width // 8), (scale,scale), octaves, persistence)
-                replacement_value = self.scale_tensor(torch.clone(replacement_value),min_max)
-                if reduce_near_zero_factor > 0:
-                    replacement_value = self.reduce_near_zero(torch.clone(replacement_value),reduce_near_zero_factor)
-                
-                if min_max_method == "clamp":
-                    result = result.clamp(-min_max, min_max)
-                elif min_max_method == "zero_out":
-                    mask = (result < -min_max) | (result > min_max)
-                    result[mask] = 0
-                elif min_max_method == "replace":
-                    mask = (result < -min_max) | (result > min_max)
-                    result[mask] = replacement_value[mask]
-                elif min_max_method == "stretch":
-                    result = self.scale_tensor(torch.clone(result),min_max)
-                if reduce_near_zero_factor > 0:
-                    result = self.reduce_near_zero(torch.clone(result),reduce_near_zero_factor)
-                if center_mean:
-                    result = result - torch.mean(result)
+                noise_values = self.rand_perlin_2d_octaves((height // 8, width // 8), (1,1), 1, 1)
+                result = (2/3+detail_level/10)*torch.erfinv(2 * noise_values - 1) * (2 ** 0.5)
+                result = torch.clamp(result,-5,5)
                 noise[i, j, :, :] = result
         return ({"samples": noise},)
     
