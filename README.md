@@ -1,6 +1,17 @@
 # noise_latent_perlinpinpin
 This allows to create latent spaces filled with perlin-based noise that can actually be used by the samplers.
 
+# Update!
+I simplified the algorith to now be able to support all resolutions (you should keep the same aspect ratio if you're upscaling however).
+It is also much more simple to use as well as it will have no artifacts.
+
+The simple trick to break the perlin pattern is now the following line:
+
+    noise = (torch.sin(torch.remainder(noise*1000000,83))+1)/2
+
+This just detroys the smooth pattern while keeping it predictable at all scales.
+
+
 # installation:
 Just drop the .py file in your custom nodes folder or download the repository as zip and put it in the custom nodes folder.
 
