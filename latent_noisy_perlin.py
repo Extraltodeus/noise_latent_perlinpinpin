@@ -47,7 +47,8 @@ class NoisyLatentPerlin:
             noise += amplitude * self.rand_perlin_2d(shape, (frequency*res[0], frequency*res[1]))
             frequency *= 2
             amplitude *= persistence
-        noise = (torch.sin(torch.remainder(noise*1000000,83))+1)/2
+        noise = torch.remainder(torch.abs(noise)*1000000,11)/11
+        # noise = (torch.sin(torch.remainder(noise*1000000,83))+1)/2
         return noise
     
     def scale_tensor(self, x):
@@ -62,7 +63,7 @@ class NoisyLatentPerlin:
         for i in range(batch_size):
             for j in range(4):
                 noise_values = self.rand_perlin_2d_octaves((height // 8, width // 8), (1,1), 1, 1)
-                result = (2/3+detail_level/10)*torch.erfinv(2 * noise_values - 1) * (2 ** 0.5)
+                result = (1+detail_level/10)*torch.erfinv(2 * noise_values - 1) * (2 ** 0.5)
                 result = torch.clamp(result,-5,5)
                 noise[i, j, :, :] = result
         return ({"samples": noise},)
