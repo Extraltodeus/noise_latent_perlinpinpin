@@ -32,8 +32,6 @@ I've included a workflow with notes in it to give you the basics but this is unc
 
 Euler works good with normal noise, dpmpp2m with karras is pretty nice.
 
-It was a pain to be able to finally have a noisy usable fractal!
-
 ![image](https://github.com/Extraltodeus/noise_latent_perlinpinpin/assets/15731540/22b5e919-8d05-491b-af0c-7c62a78eb6d7)
 
 Now you can reinject the same noise pattern after an upscale and get more coherent results.
