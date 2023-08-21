@@ -24,8 +24,7 @@ https://github.com/BlenderNeko/ComfyUI_Noise
 A workflow using his node is within the house picture at the end of the readme.
 
 # known limitation:
-- Only multiples of octave\*scale\*8 (so 512 at the default settings) can be used for the resolutions or it will throw an error.
-- If a kitten sneezes on the wrong setting from a distance it might just break everything.
+- You should keep the exact same aspect ratios if you want to upscale or the patterns will not match.
 
 # Use
 
