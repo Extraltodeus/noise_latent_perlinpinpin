@@ -12,8 +12,7 @@ class NoisyLatentPerlin:
             "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             "width": ("INT", {"default": 1024, "min": 8, "max": MAX_RESOLUTION, "step": 8}),
             "height": ("INT", {"default": 1024, "min": 8, "max": MAX_RESOLUTION, "step": 8}),
-            "batch_size": ("INT", {"default": 1, "min": 1, "max": 64}),
-            "detail_level": ("FLOAT", {"default": 0, "min": -1, "max": 1.0, "step": 0.1}),
+            "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }}
     RETURN_TYPES = ("LATENT",)
     FUNCTION = "create_noisy_latents_perlin"
@@ -56,13 +55,13 @@ class NoisyLatentPerlin:
         x = (x - min_value) / (max_value - min_value)
         return x
 
-    def create_noisy_latents_perlin(self, seed, width, height, batch_size, detail_level):
+    def create_noisy_latents_perlin(self, seed, width, height, batch_size):
         torch.manual_seed(seed)
         noise = torch.zeros((batch_size, 4, height // 8, width // 8), dtype=torch.float32, device="cpu").cpu()
         for i in range(batch_size):
             for j in range(4):
                 noise_values = self.rand_perlin_2d_octaves((height // 8, width // 8), (1,1), 1, 1)
-                result = (2/3+detail_level/10)*torch.erfinv(2 * noise_values - 1) * (2 ** 0.5)
+                result = (2/3)*torch.erfinv(2 * noise_values - 1) * (2 ** 0.5)
                 result = torch.clamp(result,-5,5)
                 noise[i, j, :, :] = result
         return ({"samples": noise},)
