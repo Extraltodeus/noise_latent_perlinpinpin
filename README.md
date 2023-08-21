@@ -24,7 +24,7 @@ https://github.com/BlenderNeko/ComfyUI_Noise
 A workflow using his node is within the house picture at the end of the readme.
 
 # known limitation:
-- You should keep the exact same aspect ratios if you want to upscale or the patterns will not match.
+- You should keep the exact same aspect ratios if you want to upscale or the patterns will not match. ⚠⚠⚠⚠⚠⚠
 
 # Use
 
