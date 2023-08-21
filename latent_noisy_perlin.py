@@ -61,7 +61,7 @@ class NoisyLatentPerlin:
         for i in range(batch_size):
             for j in range(4):
                 noise_values = self.rand_perlin_2d_octaves((height // 8, width // 8), (1,1), 1, 1)
-                result = (2/3)*torch.erfinv(2 * noise_values - 1) * (2 ** 0.5)
+                result = (2/3)*torch.erfinv(2 * noise_values - 1) * (2 ** 0.5) #not sure why I have to use a std dev of 2/3 but without this everything breaks
                 result = torch.clamp(result,-5,5)
                 noise[i, j, :, :] = result
         return ({"samples": noise},)
