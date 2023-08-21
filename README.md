@@ -7,7 +7,7 @@ It is also much more simple to use as well as it will have no artifacts.
 
 The simple trick to break the perlin pattern is now the following line:
 
-    noise = (torch.sin(torch.remainder(noise*1000000,83))+1)/2
+    noise = torch.remainder(torch.abs(noise)*1000000,11)/11
 
 This just detroys the smooth pattern while keeping it predictable at all scales.
 
