@@ -1,0 +1,14 @@
+[project]
+name = "noise_latent_perlinpinpin"
+description = "Nodes: NoisyLatentPerlin. This allows to create latent spaces filled with perlin-based noise that can actually be used by the samplers."
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/Extraltodeus/noise_latent_perlinpinpin"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "noise_latent_perlinpinpin"
+Icon = ""
